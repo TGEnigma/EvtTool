@@ -14,9 +14,9 @@ namespace EvtTool
         [JsonConverter(typeof(StringEnumConverter))]
         public EvtObjectType Type { get; set; }
 
-        public int Field08 { get; set; }
+        public int ResourceCategory { get; set; }
 
-        public int DuplicateObjectIndex { get; set; }
+        public int ResourceUniqueId { get; set; }
 
         public int ResourceMajorId { get; set; }
 
@@ -25,58 +25,58 @@ namespace EvtTool
         public short ResourceMinorId { get; set; }
 
         [JsonConverter(typeof(HexStringJsonConverter))]
-        public uint Field1C { get; set; }
+        public uint Flags { get; set; }
 
-        public int AnimationMajorId { get; set; }
+        public int BaseMotionNo { get; set; }
 
-        public int AnimationMinorId { get; set; }
+        public int ExtBaseMotionNo { get; set; }
 
-        public int AnimationSubId { get; set; }
+        public int ExtAddMotionNo { get; set; }
 
-        public int Field28 { get; set; }
+        public int Reserve28 { get; set; }
 
-        public int Field2C { get; set; }
+        public int Reserve2C { get; set; }
 
         public EvtObject()
         {
-            Field08 = 1;
-            AnimationMajorId = -1;
-            AnimationMinorId = -1;
-            AnimationSubId = -1;
+            ResourceCategory = 1;
+            BaseMotionNo = -1;
+            ExtBaseMotionNo = -1;
+            ExtAddMotionNo = -1;
         }
 
         internal void Read( EndianBinaryReader reader )
         {
             Id = reader.ReadInt32();
             Type = ( EvtObjectType ) reader.ReadInt32();
-            Field08 = reader.ReadInt32();
-            DuplicateObjectIndex = reader.ReadInt32();
+            ResourceCategory = reader.ReadInt32();
+            ResourceUniqueId = reader.ReadInt32();
             ResourceMajorId = reader.ReadInt32();
             ResourceSubId = reader.ReadInt16();
             ResourceMinorId = reader.ReadInt16();
-            Field1C = reader.ReadUInt32();
-            AnimationMajorId = reader.ReadInt32();
-            AnimationMinorId = reader.ReadInt32();
-            AnimationSubId = reader.ReadInt32();
-            Field28 = reader.ReadInt32();
-            Field2C = reader.ReadInt32();
+            Flags = reader.ReadUInt32();
+            BaseMotionNo = reader.ReadInt32();
+            ExtBaseMotionNo = reader.ReadInt32();
+            ExtAddMotionNo = reader.ReadInt32();
+            Reserve28 = reader.ReadInt32();
+            Reserve2C = reader.ReadInt32();
         }
 
         internal void Write( EndianBinaryWriter writer )
         {
             writer.Write( Id );
             writer.Write( ( int ) Type );
-            writer.Write( Field08 );
-            writer.Write( DuplicateObjectIndex );
+            writer.Write( ResourceCategory );
+            writer.Write( ResourceUniqueId );
             writer.Write( ResourceMajorId );
             writer.Write( ResourceSubId );
             writer.Write( ResourceMinorId );
-            writer.Write( Field1C );
-            writer.Write( AnimationMajorId );
-            writer.Write( AnimationMinorId );
-            writer.Write( AnimationSubId );
-            writer.Write( Field28 );
-            writer.Write( Field2C );
+            writer.Write( Flags );
+            writer.Write( BaseMotionNo );
+            writer.Write( ExtBaseMotionNo );
+            writer.Write( ExtAddMotionNo );
+            writer.Write( Reserve28 );
+            writer.Write( Reserve2C );
         }
     }
 }
