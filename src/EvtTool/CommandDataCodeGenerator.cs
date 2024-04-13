@@ -31,11 +31,11 @@ namespace EvtTool
                     var data = command.Data as UnknownCommandData;
                     if ( data == null )
                     {
-                        commandDataStructures[command.Type] = null;
+                        commandDataStructures[command.CommandCode] = null;
                         continue;
                     }
 
-                    var structure = new Structure( command.Type );
+                    var structure = new Structure( command.CommandCode );
                     var integers = new List<int>();
                     for ( int i = 0; i < data.Bytes.Length; i += 4 )
                     {
@@ -56,10 +56,10 @@ namespace EvtTool
                         structure.Fields.Add( new Field( i * 4, type, value ) );
                     }
 
-                    if ( !commandDataStructures.ContainsKey( command.Type ) )
-                        commandDataStructures[command.Type] = new List<Structure>();
+                    if ( !commandDataStructures.ContainsKey( command.CommandCode ) )
+                        commandDataStructures[command.CommandCode] = new List<Structure>();
 
-                    commandDataStructures[command.Type].Add( structure );
+                    commandDataStructures[command.CommandCode].Add( structure );
                 }
             }
 

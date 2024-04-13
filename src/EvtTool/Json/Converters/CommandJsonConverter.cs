@@ -15,10 +15,10 @@ namespace EvtTool.Json.Converters
             var command = new Command();
             serializer.Populate( jsonObject.CreateReader(), command );
 
-            if ( command.Type.Length > 0 )
+            if ( command.CommandCode.Length > 0 )
             {
                 // Deserialize command data
-                var data = CommandDataFactory.Create( command.Type );
+                var data = CommandDataFactory.Create( command.CommandCode );
                 serializer.Populate( jsonObject[ "Data" ].CreateReader(), data );
                 command.Data = data;
             }
